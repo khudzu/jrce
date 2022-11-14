@@ -31,7 +31,7 @@ a {
 }
 
 .top-wrapper {
-  padding: 180px 0 100px 0;
+  padding: 100px 0 135px 0;
   background-image: url(Header.jpeg);
   background-size: cover;
   color: white;
@@ -145,7 +145,7 @@ header {
 }
 
 .heading {
-  padding-top: 80px;
+  padding-top: 10px;
   padding-bottom: 50px;
   color: #5f5d60;
 }
