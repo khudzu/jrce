@@ -22,9 +22,17 @@ a {
   margin: 0 auto;
 }
 
-.top-wrapper {
-  padding: 180px 0 10px 0;
+.bottom-wrapper {
+  padding:10px 0 900px 0;
   background-image: url(https://ejournal.uin-malang.ac.id/public/site/images/kz/Sertifikat.jpg);
+  background-size: cover;
+  color: white;
+  text-align: center;
+}
+
+.top-wrapper {
+  padding: 250px 0 600px 0;
+  background-image: url(https://github.com/khudzu/jrce/blob/main/Header.jpeg);
   background-size: cover;
   color: white;
   text-align: center;
