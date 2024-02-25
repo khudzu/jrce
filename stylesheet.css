@@ -33,7 +33,7 @@ a {
 .top-wrapper {
   padding: 100px 0 135px 0;
   background-image: url(Header.jpeg);
-  background-size: cover;
+  background-size: auto;
   color: white;
   text-align: center;
 }
