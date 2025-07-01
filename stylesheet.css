@@ -23,9 +23,11 @@ a {
 }
 
 .bottom-wrapper {
-  padding:10px 0 900px 0;
+  padding: 10px 0 900px 0;
   background-image: url(https://ejournal.uin-malang.ac.id/public/site/images/kz/Sertifikat.jpg);
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   color: white;
   text-align: center;
 }
