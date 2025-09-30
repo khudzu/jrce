@@ -11,6 +11,8 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <style>
         /* === Reset & Variabel Global === */
         :root {
@@ -42,106 +44,24 @@
             padding: 0 20px;
         }
 
-        /* === Header & Navigasi === */
-        header {
-            background-color: var(--white-color);
-            box-shadow: var(--shadow);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+        /* ... (CSS untuk Header, Hero Section, Info Bar tetap sama) ... */
+        header { background-color: var(--white-color); box-shadow: var(--shadow); padding: 1rem 0; position: sticky; top: 0; z-index: 1000; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { height: 50px; width: auto; }
+        .main-nav ul { list-style: none; display: flex; }
+        .main-nav li { margin-left: 25px; }
+        .main-nav a { text-decoration: none; color: var(--dark-color); font-weight: 600; padding: 5px 10px; border-radius: 5px; transition: background-color 0.3s, color 0.3s; }
+        .main-nav a:hover { background-color: var(--primary-color); color: var(--white-color); }
+        .main-nav a.login { background-color: var(--secondary-color); color: var(--white-color); }
+        .menu-icon { display: none; font-size: 1.8rem; cursor: pointer; }
+        .hero-section { background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover; color: var(--white-color); text-align: center; padding: 80px 20px; }
+        .hero-section h1 { font-size: 2.8rem; margin-bottom: 1rem; }
+        .hero-section p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem auto; }
+        .btn { display: inline-block; background-color: var(--secondary-color); color: var(--white-color); padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: background-color 0.3s, transform 0.3s; }
+        .btn:hover { background-color: var(--primary-color); transform: translateY(-3px); }
+        .info-bar { background-color: var(--primary-color); color: var(--white-color); text-align: center; padding: 1rem; font-weight: 600; }
 
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            height: 50px;
-            width: auto;
-        }
-
-        .main-nav ul {
-            list-style: none;
-            display: flex;
-        }
-
-        .main-nav li {
-            margin-left: 25px;
-        }
-
-        .main-nav a {
-            text-decoration: none;
-            color: var(--dark-color);
-            font-weight: 600;
-            padding: 5px 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .main-nav a:hover {
-            background-color: var(--primary-color);
-            color: var(--white-color);
-        }
-
-        .main-nav a.login {
-            background-color: var(--secondary-color);
-            color: var(--white-color);
-        }
-        
-        .menu-icon {
-            display: none; /* Sembunyikan di desktop */
-            font-size: 1.8rem;
-            cursor: pointer;
-        }
-
-        /* === Hero Section (Bagian Atas) === */
-        .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
-            color: var(--white-color);
-            text-align: center;
-            padding: 80px 20px;
-        }
-
-        .hero-section h1 {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero-section p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 2rem auto;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--secondary-color);
-            color: var(--white-color);
-            padding: 12px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        .btn:hover {
-            background-color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-        
-        /* Menghapus Marquee dan menggantinya dengan section info */
-        .info-bar {
-            background-color: var(--primary-color);
-            color: var(--white-color);
-            text-align: center;
-            padding: 1rem;
-            font-weight: 600;
-        }
-
-        /* === Archives Section === */
+        /* === MODIFIKASI: Archives Section untuk Slideshow === */
         .archives-section {
             padding: 60px 0;
         }
@@ -153,10 +73,15 @@
             color: var(--dark-color);
         }
         
-        .journal-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
+        /* Wadah utama Swiper */
+        .swiper {
+            width: 100%;
+            padding: 20px 0 50px 0; /* Beri ruang untuk pagination */
+        }
+        
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
         }
 
         .journal-card {
@@ -165,6 +90,8 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: transform 0.3s, box-shadow 0.3s;
+            width: 300px; /* Lebar kartu bisa ditentukan di sini */
+            flex-shrink: 0;
         }
 
         .journal-card:hover {
@@ -172,123 +99,45 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
-        .journal-card a {
-            text-decoration: none;
-            color: inherit;
+        .journal-card a { text-decoration: none; color: inherit; }
+        .journal-card .cover-image { width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover; display: block; }
+        .journal-card .card-content { padding: 20px; text-align: center; }
+        .journal-card .volume-info { font-weight: 600; font-size: 1.1rem; margin-bottom: 5px; }
+        .journal-card .publication-date { font-size: 0.9rem; color: var(--grey-color); }
+
+        /* Kustomisasi tombol navigasi dan pagination Swiper */
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--primary-color);
         }
 
-        .journal-card .cover-image {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 2 / 3; /* Menjaga rasio gambar sampul */
-            object-fit: cover;
-            display: block;
-        }
-
-        .journal-card .card-content {
-            padding: 20px;
-            text-align: center;
+        .swiper-pagination-bullet-active {
+            background-color: var(--primary-color);
         }
         
-        .journal-card .volume-info {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
-
-        .journal-card .publication-date {
-            font-size: 0.9rem;
-            color: var(--grey-color);
-        }
-        
-        /* === Footer === */
-        footer {
-            background-color: var(--dark-color);
-            color: var(--light-color);
-            padding: 40px 0;
-            margin-top: 40px;
-        }
-
-        .footer-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 30px;
-            text-align: center;
-        }
-        
-        .footer-logo img {
-            height: 60px;
-        }
-        
-        .footer-section {
-            text-align: center;
-        }
-        
-        .footer-section h4 {
-            margin-bottom: 10px;
-            color: var(--grey-color);
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-
-        .footer-section img {
-            max-height: 40px;
-            margin: 5px;
-            border-radius: 5px;
-        }
-
-        /* === Media Queries untuk Responsivitas === */
+        /* ... (CSS untuk Footer & Media Queries tetap sama) ... */
+        footer { background-color: var(--dark-color); color: var(--light-color); padding: 40px 0; margin-top: 40px; }
+        .footer-container { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 30px; text-align: center; }
+        .footer-logo img { height: 60px; }
+        .footer-section { text-align: center; }
+        .footer-section h4 { margin-bottom: 10px; color: var(--grey-color); text-transform: uppercase; font-size: 0.9rem; }
+        .footer-section img { max-height: 40px; margin: 5px; border-radius: 5px; }
         @media (max-width: 768px) {
-            .main-nav {
-                display: none;
-                position: absolute;
-                top: 72px;
-                left: 0;
-                width: 100%;
-                background-color: var(--white-color);
-                box-shadow: var(--shadow);
-            }
-            
-            .main-nav.active {
-                display: block;
-            }
-
-            .main-nav ul {
-                flex-direction: column;
-                padding: 1rem 0;
-            }
-
-            .main-nav li {
-                margin: 0;
-                text-align: center;
-            }
-
-            .main-nav a {
-                display: block;
-                padding: 1rem;
-                border-bottom: 1px solid var(--light-color);
-            }
-            
-            .menu-icon {
-                display: block; /* Tampilkan di mobile */
-            }
-
-            .hero-section h1 {
-                font-size: 2.2rem;
-            }
+            .main-nav { display: none; position: absolute; top: 72px; left: 0; width: 100%; background-color: var(--white-color); box-shadow: var(--shadow); }
+            .main-nav.active { display: block; }
+            .main-nav ul { flex-direction: column; padding: 1rem 0; }
+            .main-nav li { margin: 0; text-align: center; }
+            .main-nav a { display: block; padding: 1rem; border-bottom: 1px solid var(--light-color); }
+            .menu-icon { display: block; }
+            .hero-section h1 { font-size: 2.2rem; }
         }
-
     </style>
 </head>
 <body>
 
     <header>
         <div class="container header-container">
-            <div class="header-left">
-                <a href="#"><img class="logo" src="https://lp2m.uin-malang.ac.id/wp-content/uploads/2018/03/LP2M.png" alt="Logo LP2M"></a>
-            </div>
+            <div class="header-left"><a href="#"><img class="logo" src="https://lp2m.uin-malang.ac.id/wp-content/uploads/2018/03/LP2M.png" alt="Logo LP2M"></a></div>
             <nav class="main-nav" id="mainNav">
                 <ul>
                     <li><a href="https://ejournal.uin-malang.ac.id/index.php/jrce/issue/archive">Archive</a></li>
@@ -296,118 +145,33 @@
                     <li><a href="https://ejournal.uin-malang.ac.id/index.php/jrce/login" class="login">Log in</a></li>
                 </ul>
             </nav>
-            <div class="menu-icon" id="menuIcon">
-                <i class="fas fa-bars"></i>
-            </div>
+            <div class="menu-icon" id="menuIcon"><i class="fas fa-bars"></i></div>
         </div>
     </header>
 
     <main>
-        <section class="hero-section">
-            <div class="container">
-                <h1>Selamat Datang di Journal of Research on Community Engagement</h1>
-                <p>Tetaplah Mengabdi di masa pandemi dengan menerapkan Protokol Kesehatan.</p>
-                <a href="https://ejournal.uin-malang.ac.id/index.php/jrce/user/register" class="btn">Daftar Sekarang</a>
-            </div>
-        </section>
-
-        <section class="info-bar">
-            <span>Informasi terbaru selalu kami sediakan untuk Anda!</span>
-        </section>
+        <section class="hero-section"><div class="container"><h1>Selamat Datang di Journal of Research on Community Engagement</h1><p>Tetaplah Mengabdi di masa pandemi dengan menerapkan Protokol Kesehatan.</p><a href="https://ejournal.uin-malang.ac.id/index.php/jrce/user/register" class="btn">Daftar Sekarang</a></div></section>
+        <section class="info-bar"><span>Informasi terbaru selalu kami sediakan untuk Anda!</span></section>
 
         <section class="archives-section">
             <div class="container">
                 <h1 class="section-heading">Arsip Jurnal</h1>
-                <div class="journal-grid">
-                    <div class="journal-card">
-                        <a href="https://ejournal.uin-malang.ac.id/index.php/jrce/issue/view/1451">
-                            <img src="JRCE71REV.jpg" alt="Cover JRCE Volume 7 No.1" class="cover-image">
-                            <div class="card-content">
-                                <p class="volume-info">Volume 7, No. 1</p>
-                                <p class="publication-date">Terbit Pada September 2025</p>
+                
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="journal-card">
+                                <a href="https://ejournal.uin-malang.ac.id/index.php/jrce/issue/view/1451"><img src="JRCE71REV.jpg" alt="Cover JRCE Volume 7 No.1" class="cover-image"><div class="card-content"><p class="volume-info">Volume 7, No. 1</p><p class="publication-date">Terbit Pada September 2025</p></div></a>
                             </div>
-                        </a>
-                    </div>
-                    <div class="journal-card">
-                        <a href="https://ejournal.uin-malang.ac.id/index.php/jrce/issue/view/1320">
-                            <img src="JRCE62.jpg" alt="Cover JRCE Volume 6 No.2" class="cover-image">
-                            <div class="card-content">
-                                <p class="volume-info">Volume 6, No. 2</p>
-                                <p class="publication-date">Terbit Pada Maret 2025</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="journal-card">
+                                <a href="https://ejournal.uin-malang.ac.id/index.php/jrce/issue/view/1320"><img src="JRCE62.jpg" alt="Cover JRCE Volume 6 No.2" class="cover-image"><div class="card-content"><p class="volume-info">Volume 6, No. 2</p><p class="publication-date">Terbit Pada Maret 2025</p></div></a>
                             </div>
-                        </a>
-                    </div>
-                    <div class="journal-card">
-                        <a href="https://ejournal.uin-malang.ac.id/index.php/jrce/issue/view/1239">
-                            <img src="JRCE61.jpg" alt="Cover JRCE Volume 6 No.1" class="cover-image">
-                            <div class="card-content">
-                                <p class="volume-info">Volume 6, No. 1</p>
-                                <p class="publication-date">Terbit Pada September 2024</p>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="journal-card">
+                                <a href="https://ejournal.uin-malang.ac.id/index.php/jrce/issue/view/1239"><img src="JRCE61.jpg" alt="Cover JRCE Volume 6 No.1" class="cover-image"><div class="card-content"><p class="volume-info">Volume 6, No. 1</p><p class="publication-date">Terbit Pada September 2024</p></div></a>
                             </div>
-                        </a>
-                    </div>
-                    <div class="journal-card">
-                        <a href="https://ejournal.uin-malang.ac.id/index.php/jrce/issue/view/1180">
-                            <img src="JRCE52.jpg" alt="Cover JRCE Volume 5 No.2" class="cover-image">
-                            <div class="card-content">
-                                <p class="volume-info">Volume 5, No. 2</p>
-                                <p class="publication-date">Terbit Pada Maret 2024</p>
-                            </div>
-                        </a>
-                    </div>
-                     <div class="journal-card">
-                        <a href="https://ejournal.uin-malang.ac.id/index.php/jrce/issue/view/1122">
-                            <img src="JRCE.jpg" alt="Cover JRCE Volume 5 No.1" class="cover-image">
-                            <div class="card-content">
-                                <p class="volume-info">Volume 5, No. 1</p>
-                                <p class="publication-date">Terbit Pada September 2023</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="journal-card">
-                        <a href="https://ejournal.uin-malang.ac.id/index.php/jrce/issue/view/1049">
-                            <img src="https://ejournal.uin-malang.ac.id/public/journals/43/cover_issue_1049_en_US.jpg" alt="Cover JRCE Volume 4 No.2" class="cover-image">
-                            <div class="card-content">
-                                <p class="volume-info">Volume 4, No. 2</p>
-                                <p class="publication-date">Terbit Pada Maret 2023</p>
-                            </div>
-                        </a>
-                    </div>
-                     </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container footer-container">
-            <div class="footer-logo">
-                <img src="https://lp2m.uin-malang.ac.id/wp-content/uploads/2018/03/LP2M.png" alt="Logo LP2M Footer">
-            </div>
-            <div class="footer-section">
-                <h4>Indexed by</h4>
-                <img src="https://ejournal.unsrat.ac.id/public/site/images/dingsepandiangan/Logo-Sinta-5.jpg" alt="Logo Sinta 5">
-                <img src="https://pict.sindonews.net/dyn/620/pena/news/2021/11/24/146/608875/cara-membuat-dan-menggunakan-google-scholar-adq.jpg" alt="Logo Google Scholar">
-            </div>
-            <div class="footer-section">
-                <h4>License</h4>
-                <img src="https://licensebuttons.net/l/by-sa/4.0/88x31.png" alt="Creative Commons License">
-            </div>
-            <div class="footer-section">
-                <h4>Akreditasi</h4>
-                <img src="https://ejournal.uin-malang.ac.id/public/site/images/kz/Sertifikat.jpg" alt="Sertifikat Akreditasi">
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // JavaScript untuk toggle menu mobile
-        const menuIcon = document.getElementById('menuIcon');
-        const mainNav = document.getElementById('mainNav');
-
-        menuIcon.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-        });
-    </script>
-
-</body>
-</html>
+                        </div>
+                        <div class
