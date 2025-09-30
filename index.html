@@ -103,63 +103,24 @@
             cursor: pointer;
         }
 
-       /* === MODIFIKASI: Hero Section menjadi Slideshow === */
-.hero-section {
-    position: relative; /* Diperlukan untuk menampung konten teks */
-    color: var(--white-color);
-    height: 85vh; /* Mengatur tinggi hero section, bisa disesuaikan */
-    width: 100%;
-}
+        /* === Hero Section (Bagian Atas) === */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+            color: var(--white-color);
+            text-align: center;
+            padding: 80px 20px;
+        }
 
-/* BARU: Styling untuk container Swiper di hero */
-.hero-swiper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
+        .hero-section h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
 
-/* BARU: Styling untuk setiap slide background */
-.hero-slide {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-}
-
-/* BARU: Styling untuk konten teks di atas slider */
-.hero-content {
-    position: relative; /* Agar berada di atas Swiper */
-    z-index: 10; /* Memastikan teks di lapisan paling atas */
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Overlay gelap agar teks terbaca */
-}
-
-.hero-content h1 {
-    font-size: 2.8rem;
-    margin-bottom: 1rem;
-}
-
-.hero-content p {
-    font-size: 1.2rem;
-    max-width: 700px;
-    margin: 0 auto 2rem auto;
-}
-
-/* BARU: Kustomisasi pagination untuk hero slider */
-.hero-pagination .swiper-pagination-bullet {
-    background: rgba(255, 255, 255, 0.8);
-}
-.hero-pagination .swiper-pagination-bullet-active {
-    background: var(--white-color);
-}
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+        }
         
         .btn {
             display: inline-block;
@@ -338,27 +299,13 @@
     </header>
 
     <main>
-       <section class="hero-section">
-    <div class="swiper hero-swiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide hero-slide" style="background-image: url('https://images.unsplash.com/photo-1594101861051-2ef32231c513?q=80&w=2070&auto=format&fit=crop');">
+        <section class="hero-section">
+            <div class="container">
+                <h1>Selamat Datang di Journal of Research on Community Engagement</h1>
+                <p>Tetaplah Mengabdi di masa pandemi dengan menerapkan Protokol Kesehatan.</p>
+                <a href="https://ejournal.uin-malang.ac.id/index.php/jrce/user/register" class="btn">Daftar Sekarang</a>
             </div>
-            <div class="swiper-slide hero-slide" style="background-image: url('https://images.unsplash.com/photo-1590403758223-99b8045579f1?q=80&w=2070&auto=format&fit=crop');">
-            </div>
-            <div class="swiper-slide hero-slide" style="background-image: url('https://images.unsplash.com/photo-1540879684346-6090e72ae96b?q=80&w=2070&auto=format&fit=crop');">
-            </div>
-        </div>
-        <div class="swiper-pagination hero-pagination"></div>
-    </div>
-
-    <div class="hero-content">
-        <div class="container">
-            <h1>Selamat Datang di Journal of Research on Community Engagement</h1>
-            <p>Tetaplah Mengabdi di masa pandemi dengan menerapkan Protokol Kesehatan.</p>
-            <a href="https://ejournal.uin-malang.ac.id/index.php/jrce/user/register" class="btn">Daftar Sekarang</a>
-        </div>
-    </div>
-</section>
+        </section>
 
         <section class="info-bar">
             <span>Informasi terbaru selalu kami sediakan untuk Anda!</span>
@@ -562,45 +509,6 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        // JavaScript Kustom
-
-// Skrip untuk menu mobile (sudah ada)
-const menuIcon = document.getElementById('menuIcon');
-const mainNav = document.getElementById('mainNav');
-menuIcon.addEventListener('click', () => {
-    mainNav.classList.toggle('active');
-});
-
-// Inisialisasi Swiper untuk Arsip Jurnal (sudah ada)
-const swiper = new Swiper('.swiper', {
-    // ...opsi untuk slider jurnal...
-    autoplay: { delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true, },
-    loop: true,
-    slidesPerView: 1,
-    spaceBetween: 20,
-    breakpoints: { 768: { slidesPerView: 2, spaceBetween: 30 }, 1024: { slidesPerView: 3, spaceBetween: 40 } },
-    pagination: { el: '.swiper-pagination', clickable: true, },
-    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev', },
-});
-
-// --- TAMBAHKAN KODE BARU DI BAWAH INI ---
-
-// BARU: Inisialisasi Swiper untuk Hero Section
-const heroSwiper = new Swiper('.hero-swiper', {
-    effect: 'fade', // Efek transisi fade, lebih halus untuk background
-    fadeEffect: {
-        crossFade: true
-    },
-    autoplay: {
-        delay: 5000, // Durasi 5 detik per gambar
-        disableOnInteraction: false,
-    },
-    loop: true, // Agar slideshow terus berputar
-    pagination: {
-        el: '.hero-pagination', // Menggunakan pagination khusus hero
-        clickable: true,
-    },
-});
         // JavaScript untuk toggle menu mobile
         const menuIcon = document.getElementById('menuIcon');
         const mainNav = document.getElementById('mainNav');
